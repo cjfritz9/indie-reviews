@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import Link from 'next/link';
+import './globals.css';
 
 interface Props {
   children: ReactNode;
@@ -12,7 +13,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
         <header>
           <nav>
             <ul>
-            <li>
+              <li>
                 <Link href='/'>Home</Link>
               </li>
               <li>
@@ -25,7 +26,12 @@ const RootLayout: React.FC<Props> = ({ children }) => {
           </nav>
         </header>
         <main>{children}</main>
-        <footer>Game data and images courtesy of <a href='https://rawg.io' target='_blank'>RAWG.io</a></footer>
+        <footer>
+          Game data and images courtesy of{' '}
+          <a href='https://rawg.io' target='_blank'>
+            RAWG.io
+          </a>
+        </footer>
       </body>
     </html>
   );
