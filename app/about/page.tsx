@@ -1,9 +1,10 @@
 import React from 'react';
+import Heading from '@/components/Heading';
 
 const AboutPage: React.FC = () => {
   return (
     <div>
-      <h1>About Indie Reviews</h1>
+      <Heading textContent='About Indie Reviews' />
       <p>Founded literally right now, we review indie games!</p>
     </div>
   );

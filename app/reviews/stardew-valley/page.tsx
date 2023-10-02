@@ -1,9 +1,10 @@
 import React from 'react';
+import Heading from '@/components/Heading';
 
 const StardewValleyPage: React.FC = () => {
   return (
     <>
-      <h1>Stardew Valley</h1>
+      <Heading textContent='Stardew Valley' />
       <p>This game rocks!</p>
     </>
   );
