@@ -8,7 +8,7 @@ const HomePage: React.FC = async () => {
   const featuredReview = await getFeaturedReview();
   return (
     <>
-      <Heading textContent='Indie Game Reviews' />
+      <Heading textContent='Indie Reviews' />
       <p className='pb-3'>The best indie games, reviewed by us, for you.</p>
       <div className='bg-white border w-80 sm:w-full rounded shadow hover:shadow-xl'>
         <Link

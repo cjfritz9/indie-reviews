@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const metadata = {
-  title: { default: 'Indie Game Reviews', template: '%s | Indie Game Reviews' },
+  title: { default: 'Indie Reviews', template: '%s | Indie Reviews' },
   description: 'The best indie games, reviewed by us, for you.'
 };
 
