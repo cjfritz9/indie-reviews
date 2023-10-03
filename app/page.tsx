@@ -3,6 +3,7 @@ import Heading from '../components/Heading';
 import Link from 'next/link';
 import { getFeaturedReview } from '@/lib/review';
 
+
 const HomePage: React.FC = async () => {
   const featuredReview = await getFeaturedReview();
   return (

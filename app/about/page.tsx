@@ -1,6 +1,10 @@
 import React from 'react';
 import Heading from '@/components/Heading';
 
+export const metadata = {
+  title: 'About'
+};
+
 const AboutPage: React.FC = () => {
   return (
     <div>

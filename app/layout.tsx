@@ -8,6 +8,11 @@ interface Props {
   children: ReactNode;
 }
 
+export const metadata = {
+  title: { default: 'Indie Game Reviews', template: '%s | Indie Game Reviews' },
+  description: 'The best indie games, reviewed by us, for you.'
+};
+
 const fontList = Object.values(fonts)
   .map((font) => font.variable)
   .join(' ');

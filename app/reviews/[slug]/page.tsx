@@ -3,18 +3,29 @@ import { getReview, getSlugs } from '@/lib/review';
 
 import Heading from '@/components/Heading';
 import { ReviewPageProps } from '@/app/@types/props';
+import ShareLinkButton from '@/components/ShareLinkButton';
 
 export const generateStaticParams = async () => {
   const slugs = await getSlugs();
   return slugs.map((slug) => ({ slug }));
 };
 
-const ReviewPage: React.FC<ReviewPageProps> = async ({ params }) => {
-  const { title, date, image, body } = await getReview(params.slug);
+export const generateMetadata = async ({ params: { slug } }) => {
+  const review = await getReview(slug);
+  return {
+    title: review.title
+  };
+};
+
+const ReviewPage: React.FC<ReviewPageProps> = async ({ params: { slug } }) => {
+  const { title, date, image, body } = await getReview(slug);
   return (
     <>
       <Heading textContent={title} />
-      <p className='italic pb-2'>{date}</p>
+      <div className='flex gap-3 items-baseline'>
+        <p className='italic pb-2'>{date}</p>
+        <ShareLinkButton />
+      </div>
       <img
         src={image}
         alt=''
