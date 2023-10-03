@@ -1,7 +1,7 @@
 import React, { type ReactNode } from 'react';
 import Link from 'next/link';
 import './globals.css';
-import NavBar from './components/NavBar';
+import NavBar from '../components/NavBar';
 import * as fonts from './fonts';
 
 interface Props {
@@ -20,7 +20,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
           <NavBar />
         </header>
         <main className='grow py-3'>{children}</main>
-        <footer className='border-t py-3 text-center text-xs'>
+        <footer className='border-t py-3 text-center text-xs text-slate-500'>
           Game data and images courtesy of{' '}
           <a
             href='https://rawg.io'
