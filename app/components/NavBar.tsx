@@ -8,12 +8,12 @@ const NavBar: React.FC = () => {
         <li>
           <Link
             href='/'
-            className='text-orange-800 hover:underline underline-offset-4'
+            className='font-orbitron font-bold text-orange-800 hover:underline underline-offset-4'
           >
-            Home
+            Indie Game Reviews
           </Link>
         </li>
-        <li>
+        <li className='ml-auto'>
           <Link
             href='/reviews'
             className='text-orange-800 hover:underline underline-offset-4'
