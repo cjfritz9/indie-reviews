@@ -1,5 +1,10 @@
-query Reviews {
-  reviews(sort: "publishedAt:desc", pagination: { pageSize: 6 }) {
+query Reviews($page: Int!) {
+  reviews(sort: "publishedAt:desc", pagination: { pageSize: 6, page: $page }) {
+    meta {
+      pagination {
+        pageCount
+      }
+    }
     data {
       id
       attributes {

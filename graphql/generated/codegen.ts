@@ -961,10 +961,12 @@ export type UsersPermissionsUserRelationResponseCollection = {
   data: Array<UsersPermissionsUserEntity>;
 };
 
-export type ReviewsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ReviewsQueryVariables = Exact<{
+  page: Scalars['Int']['input'];
+}>;
 
 
-export type ReviewsQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+export type ReviewsQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', meta: { __typename?: 'ResponseCollectionMeta', pagination: { __typename?: 'Pagination', pageCount: number } }, data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 export type FeaturedReviewsQueryVariables = Exact<{
   limit: Scalars['Int']['input'];
@@ -987,8 +989,13 @@ export type SlugsQuery = { __typename?: 'Query', reviews?: { __typename?: 'Revie
 
 
 export const ReviewsDocument = gql`
-    query Reviews {
-  reviews(sort: "publishedAt:desc", pagination: {pageSize: 6}) {
+    query Reviews($page: Int!) {
+  reviews(sort: "publishedAt:desc", pagination: {pageSize: 6, page: $page}) {
+    meta {
+      pagination {
+        pageCount
+      }
+    }
     data {
       id
       attributes {
@@ -1022,10 +1029,11 @@ export const ReviewsDocument = gql`
  * @example
  * const { data, loading, error } = useReviewsQuery({
  *   variables: {
+ *      page: // value for 'page'
  *   },
  * });
  */
-export function useReviewsQuery(baseOptions?: Apollo.QueryHookOptions<ReviewsQuery, ReviewsQueryVariables>) {
+export function useReviewsQuery(baseOptions: Apollo.QueryHookOptions<ReviewsQuery, ReviewsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<ReviewsQuery, ReviewsQueryVariables>(ReviewsDocument, options);
       }

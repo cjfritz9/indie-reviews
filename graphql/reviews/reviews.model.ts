@@ -17,17 +17,29 @@ interface Review {
   image: string;
 }
 
+export const CACHE_TAG_REVIEWS = 'reviews';
+
 const CMS_URL = 'http://localhost:1337';
 
-export const getReviews = async (pageSize = 6) => {
+export const getReviews = async (page: number, pageSize = 6) => {
   const {
     data: { reviews }
   } = await client.query({
     query: ReviewsDocument,
-    variables: { pageSize }
+    variables: { pageSize, page },
+    context: {
+      fetchOptions: {
+        next: {
+          tags: [CACHE_TAG_REVIEWS]
+        }
+      }
+    }
   });
 
-  return reviews.data.map(formatReview);
+  return {
+    pageCount: reviews.meta.pagination.pageCount,
+    reviews: reviews.data.map(formatReview)
+  };
 };
 
 export const getReview = async (slug: string) => {
@@ -37,6 +49,10 @@ export const getReview = async (slug: string) => {
     query: ReviewDocument,
     variables: { slug }
   });
+
+  if (reviews.data.length === 0) {
+    return null;
+  }
 
   return {
     ...formatReview(reviews.data[0]),
@@ -57,7 +73,14 @@ export const getFeaturedReviews = async (limit = 1) => {
     data: { reviews }
   } = await client.query({
     query: FeaturedReviewsDocument,
-    variables: { limit }
+    variables: { limit },
+    context: {
+      fetchOptions: {
+        next: {
+          tags: [CACHE_TAG_REVIEWS]
+        }
+      }
+    }
   });
 
   return reviews.data.map(formatReview);

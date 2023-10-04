@@ -6,6 +6,10 @@ import Image from 'next/image';
 
 const HomePage: React.FC = async () => {
   const reviews = await getFeaturedReviews(3);
+  console.log(
+    '[HomePage] rendering: ',
+    reviews.map((review) => review.slug).join(', ')
+  );
   return (
     <>
       <Heading textContent='Indie Reviews' />
@@ -29,13 +33,8 @@ const HomePage: React.FC = async () => {
                 className='rounded-t sm:rounded-l sm:rounded-r-none'
               />
               <div className='px-2 py-1 text-center sm:text-left'>
-
-              <h2 className='font-semibold font-orbitron'>
-                {review.title}
-              </h2>
-              <p className='hidden pt-2 sm:block'>
-                {review.subtitle}
-              </p>
+                <h2 className='font-semibold font-orbitron'>{review.title}</h2>
+                <p className='hidden pt-2 sm:block'>{review.subtitle}</p>
               </div>
             </Link>
           </li>
