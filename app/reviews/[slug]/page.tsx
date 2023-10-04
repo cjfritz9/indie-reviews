@@ -1,13 +1,13 @@
 import React from 'react';
-import { getReview, getSlugs } from '@/lib/review';
 
 import Heading from '@/components/Heading';
 import { ReviewPageProps } from '@/app/@types/props';
 import ShareLinkButton from '@/components/ShareLinkButton';
+import { getReview, getSlugs } from '@/graphql/reviews/reviews.model';
 
 export const generateStaticParams = async () => {
   const slugs = await getSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return slugs.map((slug: string) => ({ slug }));
 };
 
 export const generateMetadata = async ({ params: { slug } }) => {

@@ -1,13 +1,13 @@
 import React from 'react';
 import Heading from '@/components/Heading';
 import Link from 'next/link';
-import { getReviews } from '@/lib/review';
+import { getReviews } from '@/graphql/reviews/reviews.model';
 
 export const metadata = {
   title: 'Reviews'
 };
 
-const ReviewsPage: React.FC = async () => {
+const ReviewsPage: React.FC<any> = async () => {
   const reviews = await getReviews();
   return (
     <>

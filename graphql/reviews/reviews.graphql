@@ -1,0 +1,73 @@
+query Reviews {
+  reviews(sort: "publishedAt:desc", pagination: { pageSize: 6 }) {
+    data {
+      id
+      attributes {
+        title
+        subtitle
+        slug
+        body
+        publishedAt
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query FeaturedReview {
+  reviews(pagination: { limit: 1 }, sort: "publishedAt:desc") {
+    data {
+      id
+      attributes {
+        title
+        subtitle
+        slug
+        body
+        publishedAt
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query Review($slug: String!) {
+  reviews(filters: { slug: { eq: $slug } }) {
+    data {
+      attributes {
+        slug
+        title
+        body
+        publishedAt
+        image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query Slugs {
+  reviews {
+    data {
+      attributes {
+        slug
+      }
+    }
+  }
+}

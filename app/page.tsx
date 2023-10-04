@@ -1,7 +1,7 @@
 import React from 'react';
 import Heading from '../components/Heading';
 import Link from 'next/link';
-import { getFeaturedReview } from '@/lib/review';
+import { getFeaturedReview } from '@/graphql/reviews/reviews.model';
 
 
 const HomePage: React.FC = async () => {

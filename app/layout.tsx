@@ -1,12 +1,8 @@
-import React, { type ReactNode } from 'react';
-import Link from 'next/link';
+import React, { PropsWithChildren, type ReactNode } from 'react';
 import './globals.css';
 import NavBar from '../components/NavBar';
 import * as fonts from './fonts';
 
-interface Props {
-  children: ReactNode;
-}
 
 export const metadata = {
   title: { default: 'Indie Reviews', template: '%s | Indie Reviews' },
@@ -17,7 +13,7 @@ const fontList = Object.values(fonts)
   .map((font) => font.variable)
   .join(' ');
 
-const RootLayout: React.FC<Props> = ({ children }) => {
+const RootLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang='en' className={fontList}>
       <body className='bg-orange-50 flex flex-col px-4 py-2 min-h-screen'>
