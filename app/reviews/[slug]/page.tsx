@@ -4,6 +4,7 @@ import Heading from '@/components/Heading';
 import { ReviewPageProps } from '@/app/@types/props';
 import ShareLinkButton from '@/components/ShareLinkButton';
 import { getReview, getSlugs } from '@/graphql/reviews/reviews.model';
+import Image from 'next/image';
 
 export const generateStaticParams = async () => {
   const slugs = await getSlugs();
@@ -26,7 +27,8 @@ const ReviewPage: React.FC<ReviewPageProps> = async ({ params: { slug } }) => {
         <p className='italic pb-2'>{date}</p>
         <ShareLinkButton />
       </div>
-      <img
+      <Image
+        priority
         src={image}
         alt=''
         width='640'

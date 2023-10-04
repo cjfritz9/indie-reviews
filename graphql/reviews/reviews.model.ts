@@ -1,13 +1,11 @@
 import { marked } from 'marked';
 import client from '../apollo';
 import {
-  FeaturedReviewDocument,
+  FeaturedReviewsDocument,
   ReviewDocument,
   ReviewEntity,
-  ReviewEntityResponse,
   ReviewsDocument,
-  SlugsDocument,
-  SlugsQueryResult
+  SlugsDocument
 } from '../generated/codegen';
 
 interface Review {
@@ -21,11 +19,12 @@ interface Review {
 
 const CMS_URL = 'http://localhost:1337';
 
-export const getReviews = async () => {
+export const getReviews = async (pageSize = 6) => {
   const {
     data: { reviews }
   } = await client.query({
-    query: ReviewsDocument
+    query: ReviewsDocument,
+    variables: { pageSize }
   });
 
   return reviews.data.map(formatReview);
@@ -53,12 +52,15 @@ export const getSlugs = async () => {
   return reviews.data.map((item: ReviewEntity) => item.attributes.slug);
 };
 
-export const getFeaturedReview = async () => {
+export const getFeaturedReviews = async (limit = 1) => {
   const {
     data: { reviews }
-  } = await client.query({ query: FeaturedReviewDocument });
+  } = await client.query({
+    query: FeaturedReviewsDocument,
+    variables: { limit }
+  });
 
-  return formatReview(reviews.data[0]);
+  return reviews.data.map(formatReview);
 };
 
 const formatReview = (review: ReviewEntity) => {

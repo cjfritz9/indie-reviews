@@ -2,6 +2,7 @@ import React from 'react';
 import Heading from '@/components/Heading';
 import Link from 'next/link';
 import { getReviews } from '@/graphql/reviews/reviews.model';
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Reviews'
@@ -13,13 +14,14 @@ const ReviewsPage: React.FC<any> = async () => {
     <>
       <Heading textContent='Reviews' />
       <ul className='flex flex-row flex-wrap gap-3'>
-        {reviews.map((review) => (
+        {reviews.map((review: any, i: number) => (
           <li
             key={review.slug}
             className='bg-white border w-80 rounded shadow hover:shadow-xl'
           >
             <Link href={`/reviews/${review.slug}`}>
-              <img
+              <Image
+                priority={i === 0}
                 src={review.image}
                 alt=''
                 width='320'

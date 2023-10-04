@@ -20,8 +20,8 @@ query Reviews {
   }
 }
 
-query FeaturedReview {
-  reviews(pagination: { limit: 1 }, sort: "publishedAt:desc") {
+query FeaturedReviews($limit: Int!) {
+  reviews(pagination: { limit: $limit }, sort: "publishedAt:desc") {
     data {
       id
       attributes {

@@ -966,10 +966,12 @@ export type ReviewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ReviewsQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
-export type FeaturedReviewQueryVariables = Exact<{ [key: string]: never; }>;
+export type FeaturedReviewsQueryVariables = Exact<{
+  limit: Scalars['Int']['input'];
+}>;
 
 
-export type FeaturedReviewQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+export type FeaturedReviewsQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 export type ReviewQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -1034,9 +1036,9 @@ export function useReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Re
 export type ReviewsQueryHookResult = ReturnType<typeof useReviewsQuery>;
 export type ReviewsLazyQueryHookResult = ReturnType<typeof useReviewsLazyQuery>;
 export type ReviewsQueryResult = Apollo.QueryResult<ReviewsQuery, ReviewsQueryVariables>;
-export const FeaturedReviewDocument = gql`
-    query FeaturedReview {
-  reviews(pagination: {limit: 1}, sort: "publishedAt:desc") {
+export const FeaturedReviewsDocument = gql`
+    query FeaturedReviews($limit: Int!) {
+  reviews(pagination: {limit: $limit}, sort: "publishedAt:desc") {
     data {
       id
       attributes {
@@ -1059,31 +1061,32 @@ export const FeaturedReviewDocument = gql`
     `;
 
 /**
- * __useFeaturedReviewQuery__
+ * __useFeaturedReviewsQuery__
  *
- * To run a query within a React component, call `useFeaturedReviewQuery` and pass it any options that fit your needs.
- * When your component renders, `useFeaturedReviewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFeaturedReviewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFeaturedReviewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFeaturedReviewQuery({
+ * const { data, loading, error } = useFeaturedReviewsQuery({
  *   variables: {
+ *      limit: // value for 'limit'
  *   },
  * });
  */
-export function useFeaturedReviewQuery(baseOptions?: Apollo.QueryHookOptions<FeaturedReviewQuery, FeaturedReviewQueryVariables>) {
+export function useFeaturedReviewsQuery(baseOptions: Apollo.QueryHookOptions<FeaturedReviewsQuery, FeaturedReviewsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<FeaturedReviewQuery, FeaturedReviewQueryVariables>(FeaturedReviewDocument, options);
+        return Apollo.useQuery<FeaturedReviewsQuery, FeaturedReviewsQueryVariables>(FeaturedReviewsDocument, options);
       }
-export function useFeaturedReviewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeaturedReviewQuery, FeaturedReviewQueryVariables>) {
+export function useFeaturedReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeaturedReviewsQuery, FeaturedReviewsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<FeaturedReviewQuery, FeaturedReviewQueryVariables>(FeaturedReviewDocument, options);
+          return Apollo.useLazyQuery<FeaturedReviewsQuery, FeaturedReviewsQueryVariables>(FeaturedReviewsDocument, options);
         }
-export type FeaturedReviewQueryHookResult = ReturnType<typeof useFeaturedReviewQuery>;
-export type FeaturedReviewLazyQueryHookResult = ReturnType<typeof useFeaturedReviewLazyQuery>;
-export type FeaturedReviewQueryResult = Apollo.QueryResult<FeaturedReviewQuery, FeaturedReviewQueryVariables>;
+export type FeaturedReviewsQueryHookResult = ReturnType<typeof useFeaturedReviewsQuery>;
+export type FeaturedReviewsLazyQueryHookResult = ReturnType<typeof useFeaturedReviewsLazyQuery>;
+export type FeaturedReviewsQueryResult = Apollo.QueryResult<FeaturedReviewsQuery, FeaturedReviewsQueryVariables>;
 export const ReviewDocument = gql`
     query Review($slug: String!) {
   reviews(filters: {slug: {eq: $slug}}) {
