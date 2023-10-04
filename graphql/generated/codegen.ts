@@ -971,14 +971,14 @@ export type FeaturedReviewsQueryVariables = Exact<{
 }>;
 
 
-export type FeaturedReviewsQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+export type FeaturedReviewsQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', title: string, subtitle?: string | null, slug: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 export type ReviewQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ReviewQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', attributes?: { __typename?: 'Review', slug: string, title: string, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
+export type ReviewQuery = { __typename?: 'Query', reviews?: { __typename?: 'ReviewEntityResponseCollection', data: Array<{ __typename?: 'ReviewEntity', attributes?: { __typename?: 'Review', slug: string, title: string, subtitle?: string | null, body: string, publishedAt?: any | null, image?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } | null } | null }> } | null };
 
 export type SlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1045,7 +1045,6 @@ export const FeaturedReviewsDocument = gql`
         title
         subtitle
         slug
-        body
         publishedAt
         image {
           data {
@@ -1094,6 +1093,7 @@ export const ReviewDocument = gql`
       attributes {
         slug
         title
+        subtitle
         body
         publishedAt
         image {

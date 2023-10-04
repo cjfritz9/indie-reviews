@@ -28,7 +28,6 @@ query FeaturedReviews($limit: Int!) {
         title
         subtitle
         slug
-        body
         publishedAt
         image {
           data {
@@ -48,6 +47,7 @@ query Review($slug: String!) {
       attributes {
         slug
         title
+        subtitle
         body
         publishedAt
         image {

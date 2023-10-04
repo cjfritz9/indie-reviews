@@ -28,9 +28,15 @@ const HomePage: React.FC = async () => {
                 height='180'
                 className='rounded-t sm:rounded-l sm:rounded-r-none'
               />
-              <h2 className='font-semibold font-orbitron py-1 text-center sm:px-2'>
+              <div className='px-2 py-1 text-center sm:text-left'>
+
+              <h2 className='font-semibold font-orbitron'>
                 {review.title}
               </h2>
+              <p className='hidden pt-2 sm:block'>
+                {review.subtitle}
+              </p>
+              </div>
             </Link>
           </li>
         ))}

@@ -19,10 +19,11 @@ export const generateMetadata = async ({ params: { slug } }) => {
 };
 
 const ReviewPage: React.FC<ReviewPageProps> = async ({ params: { slug } }) => {
-  const { title, date, image, body } = await getReview(slug);
+  const { title, subtitle, date, image, body } = await getReview(slug);
   return (
     <>
       <Heading textContent={title} />
+      <p className='font-semibold pb-3'>{subtitle}</p>
       <div className='flex gap-3 items-baseline'>
         <p className='italic pb-2'>{date}</p>
         <ShareLinkButton />
