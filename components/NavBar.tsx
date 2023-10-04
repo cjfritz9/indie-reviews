@@ -1,34 +1,23 @@
 import Link from 'next/link';
 import React from 'react';
+import NavLink from './NavLink';
 
 const NavBar: React.FC = () => {
   return (
     <nav>
       <ul className='flex gap-2'>
-        <li>
-          <Link
-            href='/'
-            className='font-orbitron font-bold text-orange-800 hover:underline underline-offset-4'
-          >
-            Indie Reviews
-          </Link>
-        </li>
-        <li className='ml-auto'>
-          <Link
-            href='/reviews'
-            className='text-orange-800 hover:underline underline-offset-4'
-          >
-            Reviews
-          </Link>
-        </li>
-        <li>
-          <Link
-            href='/about'
-            className='text-orange-800 hover:underline underline-offset-4'
-          >
-            About
-          </Link>
-        </li>
+        <NavLink
+          href='/'
+          styles={{ className: 'text-orange-800 font-bold font-orbitron' }}
+        >
+          Indie Reviews
+        </NavLink>
+        <NavLink href='/reviews' liStyles={{ className: 'ml-auto' }}>
+          Reviews
+        </NavLink>
+        <NavLink href='/about' prefetch={false}>
+          About
+        </NavLink>
       </ul>
     </nav>
   );

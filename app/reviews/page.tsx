@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { getReviews } from '@/graphql/reviews/reviews.model';
 import Image from 'next/image';
 import PaginationBar from '@/components/PaginationBar';
+import SearchBar from '@/components/SearchBar';
 
 export const metadata = {
   title: 'Reviews'
@@ -12,12 +13,21 @@ export const metadata = {
 const ReviewsPage: React.FC<any> = async ({ searchParams }) => {
   const page = parsePageParam(searchParams.page);
   const { pageCount, reviews } = await getReviews(page);
+  const { reviews: games } = await getReviews(1, 100);
 
   console.log('[ReviewsPage] rendering: ', searchParams);
   return (
     <>
       <Heading textContent='Reviews' />
-      <PaginationBar page={page} pageCount={pageCount} />
+      <div className='flex justify-between pb-3'>
+        <PaginationBar page={page} pageCount={pageCount} />
+        <SearchBar
+          games={games.map((game: any) => ({
+            slug: game.slug,
+            title: game.title
+          }))}
+        />
+      </div>
       <ul className='flex flex-row flex-wrap gap-3'>
         {reviews.map((review: any, i: number) => (
           <li

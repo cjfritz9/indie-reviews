@@ -10,11 +10,13 @@ interface Props {
 const PaginationBar: React.FC<Props> = ({ page, pageCount }) => {
   return (
     <div className='flex gap-2 items-center'>
-      {page > 1 && (
+      {page > 1 ? (
         <PaginationLink href={`/reviews?page=${page - 1}`}>
           <ChevronLeftIcon className='h-5 w-5' />
           <span className='sr-only'>Previous Page</span>
         </PaginationLink>
+      ) : (
+        <span className='w-5' />
       )}
       <span>
         Page {page} of {pageCount}
