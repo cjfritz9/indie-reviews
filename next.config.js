@@ -8,8 +8,6 @@ module.exports = {
 };
 
 function toRemotePattern(urlString) {
-  console.log(process.env)
-  console.log({urlString});
   const url = new URL(urlString);
 
   return {
