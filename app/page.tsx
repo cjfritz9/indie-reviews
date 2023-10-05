@@ -6,10 +6,7 @@ import Image from 'next/image';
 
 const HomePage: React.FC = async () => {
   const reviews = await getFeaturedReviews(3);
-  console.log(
-    '[HomePage] rendering: ',
-    reviews.map((review) => review.slug).join(', ')
-  );
+
   return (
     <>
       <Heading textContent='Indie Reviews' />

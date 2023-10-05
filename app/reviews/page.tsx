@@ -1,7 +1,7 @@
 import React from 'react';
 import Heading from '@/components/Heading';
 import Link from 'next/link';
-import { getReviews, getSearchableReviews } from '@/graphql/reviews/reviews.model';
+import { getReviews } from '@/graphql/reviews/reviews.model';
 import Image from 'next/image';
 import PaginationBar from '@/components/PaginationBar';
 import SearchBar from '@/components/SearchBar';
@@ -14,12 +14,11 @@ const ReviewsPage: React.FC<any> = async ({ searchParams }) => {
   const page = parsePageParam(searchParams.page);
   const { pageCount, reviews } = await getReviews(page);
 
-  console.log('[ReviewsPage] rendering: ', searchParams);
   return (
     <>
       <Heading textContent='Reviews' />
       <div className='flex justify-between pb-3'>
-        <PaginationBar page={page} pageCount={pageCount} />
+        <PaginationBar href='/reviews' page={page} pageCount={pageCount} />
         <SearchBar />
       </div>
       <ul className='flex flex-row flex-wrap gap-3'>
