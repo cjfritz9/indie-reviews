@@ -40,6 +40,7 @@ interface PaginationLinkProps {
 const PaginationLink: React.FC<PaginationLinkProps> = ({ children, href }) => {
   return (
     <Link
+      prefetch={true}
       href={href}
       className='border rounded text-slate-500 text-sm hover:bg-orange-100 hover:text-slate-700'
     >
