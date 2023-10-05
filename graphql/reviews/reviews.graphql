@@ -1,5 +1,8 @@
-query Reviews($page: Int!) {
-  reviews(sort: "publishedAt:desc", pagination: { pageSize: 6, page: $page }) {
+query Reviews($page: Int!, $pageSize: Int) {
+  reviews(
+    sort: "publishedAt:desc"
+    pagination: { pageSize: $pageSize, page: $page }
+  ) {
     meta {
       pagination {
         pageCount
@@ -41,6 +44,20 @@ query FeaturedReviews($limit: Int!) {
             }
           }
         }
+      }
+    }
+  }
+}
+
+query SearchableReviews($query: String!) {
+  reviews(
+    filters: { title: { containsi: $query } }
+    pagination: { pageSize: 5 }
+  ) {
+    data {
+      attributes {
+        title
+        slug
       }
     }
   }

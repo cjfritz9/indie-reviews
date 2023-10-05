@@ -1,10 +1,14 @@
+import 'server-only';
+
 import { marked } from 'marked';
 import client from '../apollo';
+
 import {
   FeaturedReviewsDocument,
   ReviewDocument,
   ReviewEntity,
   ReviewsDocument,
+  SearchableReviewsDocument,
   SlugsDocument
 } from '../generated/codegen';
 
@@ -19,7 +23,7 @@ interface Review {
 
 export const CACHE_TAG_REVIEWS = 'reviews';
 
-const CMS_URL = 'http://localhost:1337';
+const CMS_URL = process.env.CMS_URL;
 
 export const getReviews = async (page: number, pageSize = 6) => {
   const {
@@ -84,6 +88,20 @@ export const getFeaturedReviews = async (limit = 1) => {
   });
 
   return reviews.data.map(formatReview);
+};
+
+export const getSearchableReviews = async (query: string) => {
+  const {
+    data: { reviews }
+  } = await client.query({
+    query: SearchableReviewsDocument,
+    variables: { query }
+  });
+
+  return reviews.data.map(({ attributes }) => ({
+    title: attributes.title,
+    slug: attributes.slug
+  }));
 };
 
 const formatReview = (review: ReviewEntity) => {
